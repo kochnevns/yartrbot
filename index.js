@@ -1,13 +1,13 @@
 'use strict';
 const
     YartrResolve = require('./yartrlinkresolve.js'),
-    NikitasTelegramBot = require('./TelegramBotBase.js'),
+    TelegramBot = require('./TelegramBotBase.js'),
     YartrUtils = require('./yartrUtils.js'),
     log = require('simple-node-logger').createSimpleFileLogger('project.log'),
     argvToken = '' + process.argv[2],
     coordsMap = require('./stations.json');
 
-class YartrBot extends NikitasTelegramBot.TelegramBotBase {
+class YartrBot extends TelegramBot.TelegramBotBase {
     constructor(token) {
         super(token);
         var self = this;
