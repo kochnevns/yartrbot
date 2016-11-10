@@ -17,7 +17,7 @@ class YartrBot extends TelegramBot.TelegramBotBase {
         });
     }
     onLocation(locationMsg) {
-        let stationKey = YartrUtils.getNearestStationLinks(locationMsg.location),
+        let stationKey = YartrUtils.getNearestStationKey(locationMsg.location),
             stationLinks = coordsMap[stationKey].links,
         userLocationKeyboard = YartrUtils.generateLocationKeyboardOptions(stationLinks);
 
