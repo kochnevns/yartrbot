@@ -17,7 +17,7 @@ module.exports = {
             })
         };
     },
-    getNearestStationLinks: function(userLocation) {
+    getNearestStationKey: function(userLocation) {
         var nearestStation = null;
         var minDelta = 100500;
         for (var stationKey in coordsMap) {
