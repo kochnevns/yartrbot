@@ -3,6 +3,7 @@ const rp = require('request-promise');
 const Entities = require('html-entities').XmlEntities;
 const log = require('simple-node-logger').createSimpleFileLogger('project.log');
 
+
 const entities = new Entities();
 
 module.exports = {
