@@ -34,4 +34,4 @@ class YartrBot extends NikitasTelegramBot.TelegramBotBase {
         YartrResolve.resolveLink(url, this, msgId, msg);
     }
 }
-const yarbot = new YartrBot('253077674:AAHXDAqu0B9y86QVDqe3WA9n0iOsMd7V5MQ')
+const yarbot = new YartrBot(argvToken);
