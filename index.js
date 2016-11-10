@@ -3,7 +3,7 @@ const YartrResolve = require('./yartrlinkresolve.js');
 
 var log = require('simple-node-logger').createSimpleFileLogger('project.log');
 
-const token = '253077674:AAHXDAqu0B9y86QVDqe3WA9n0iOsMd7V5MQ';
+const token = '' + process.argv[2];
 
 const keyboardOptions = {
   reply_markup: JSON.stringify({
