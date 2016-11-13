@@ -10,7 +10,7 @@ const
 class YartrBot extends TelegramBot.TelegramBotBase {
     constructor(token) {
         super(token);
-        var self = this;
+        let self = this;
         self.bot.onText(/[a-zа-я]/gim, function(msg, match) {
             log.info('Сообщение от ', self.getUsername(msg) ,'. Текст сообщения: ', '"', msg.text, '"')
             self.bot.sendMessage(msg.chat.id, '📡 Отправь свое местоположение');
