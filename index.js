@@ -4,7 +4,7 @@ const
     TelegramBot = require('./lib/TelegramBotBase.js'),
     YartrUtils = require('./lib/yartrUtils.js'),
     log = require('simple-node-logger').createSimpleFileLogger('project.log'),
-    argvToken = '' + process.argv[2],
+    argvToken = '' + process.argv[2], 
     coordsMap = require('./stations/stations.json');
 
 class YartrBot extends TelegramBot.TelegramBotBase {
@@ -31,7 +31,7 @@ class YartrBot extends TelegramBot.TelegramBotBase {
             userName = this.getUsername(msg);
 
         this.bot.answerCallbackQuery(msg.id, 'Ок, поехали!');
-        log.info('Начинаем обрабатывать сообщение от ', userName, '. ссылка: ', '"', url, '"');
+        log.info('Грабим расписание для ', userName, '. ссылка: ', '"', url, '"');
         YartrResolve.resolveLink(url, this.bot, msgId, msg);
     }
 }
