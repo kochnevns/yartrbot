@@ -13,6 +13,7 @@
     "node-telegram-bot-api": "^0.24.0",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",
-    "simple-node-logger": "^0.93.12"
+    "simple-node-logger": "^0.93.12",
+    "telegram-bot-oop-way": "0.0.2"
   }
 }

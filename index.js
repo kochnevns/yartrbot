@@ -1,7 +1,7 @@
 'use strict';
 const
     YartrResolve = require('./lib/yartrLinkResolve.js'),
-    TelegramBot = require('./lib/TelegramBotBase.js'),
+    TelegramBot = require('telegram-bot-oop-way'),
     YartrUtils = require('./lib/yartrUtils.js'),
     log = require('simple-node-logger').createSimpleFileLogger('project.log'),
     argvToken = '' + process.argv[2], 
@@ -11,16 +11,13 @@ class YartrBot extends TelegramBot.TelegramBotBase {
     constructor(token) {
         super(token);
         let self = this;
-        self.bot.onText(/[a-zа-я]/gim, function(msg, match) {
-            log.info('Сообщение от ', self.getUsername(msg) ,'. Текст сообщения: ', '"', msg.text, '"')
-            self.bot.sendMessage(msg.chat.id, '📡 Отправь свое местоположение');
-        });
+        this.registerOnTextCallback(/[a-zа-я]/gim, self.ontextCb.bind(self));
     }
     onLocation(locationMsg) {
         let stationKey = YartrUtils.getNearestStationKey(locationMsg.location),
             stationLinks = coordsMap[stationKey].links,
             userLocationKeyboard = YartrUtils.generateLocationKeyboardOptions(stationLinks),
-            userName = this.getUsername(locationMsg);
+            userName = this.getUserName(locationMsg);
 
         log.info('Пришли координаты от ', userName ,'. Локация: ', '"', locationMsg.location, '"');
         this.bot.sendMessage(locationMsg.chat.id, `Ближе всего: ${stationKey}.`, userLocationKeyboard);
@@ -28,11 +25,17 @@ class YartrBot extends TelegramBot.TelegramBotBase {
     onCallbackQuery(msg) {
         let msgId = msg.from.id,
             url = `http://yartr.ru/rasp.php?vt=1&nmar=78&q=1&id=${msg.data}&view=2`,
-            userName = this.getUsername(msg);
+            userName = this.getUserName(msg);
 
         this.bot.answerCallbackQuery(msg.id, 'Ок, поехали!');
         log.info('Грабим расписание для ', userName, '. ссылка: ', '"', url, '"');
         YartrResolve.resolveLink(url, this.bot, msgId, msg);
     }
+    ontextCb(msg) {
+            log.info('Сообщение от ', this.getUserName(msg) ,'. Текст сообщения: ', '"', msg.text, '"');
+            this.bot.sendMessage(msg.chat.id, '📡 Отправь свое местоположение');
+    }
 }
-const yarbot = new YartrBot(argvToken);
+
+
+new YartrBot(argvToken);
