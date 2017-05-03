@@ -1,6 +1,5 @@
 'use strict';
 const
-    YartrResolve = require('./lib/yartrLinkResolve.js'),
     TelegramBot = require('telegram-bot-oop-way'),
     YartrUtils = require('./lib/yartrUtils.js'),
     log = require('simple-node-logger').createSimpleFileLogger('project.log'),
@@ -29,7 +28,7 @@ class YartrBot extends TelegramBot.TelegramBotBase {
 
         this.bot.answerCallbackQuery(msg.id, 'Ок, поехали!');
         log.info('Грабим расписание для ', userName, '. ссылка: ', '"', url, '"');
-        YartrResolve.resolveLink(url, this.bot, msgId, msg);
+        YartrUtils.resolveLink(url, this.bot, msg).then( (message) => this.bot.sendMessage(msgId, message));
     }
     ontextCb(msg) {
             log.info('Сообщение от ', this.getUserName(msg) ,'. Текст сообщения: ', '"', msg.text, '"');
@@ -38,4 +37,4 @@ class YartrBot extends TelegramBot.TelegramBotBase {
 }
 
 
-new YartrBot(argvToken);
+new YartrBot('253077674:AAHXDAqu0B9y86QVDqe3WA9n0iOsMd7V5MQ');
