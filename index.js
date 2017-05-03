@@ -37,4 +37,4 @@ class YartrBot extends TelegramBot.TelegramBotBase {
 }
 
 
-new YartrBot('253077674:AAHXDAqu0B9y86QVDqe3WA9n0iOsMd7V5MQ');
+new YartrBot(argvToken);
