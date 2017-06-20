@@ -28,7 +28,7 @@ class YartrBot extends TelegramBot {
 
         this.answerCallbackQuery(msg.id, 'Ок, поехали!');
         log.info('Грабим расписание для ', userName, '. ссылка: ', '"', url, '"');
-        YartrUtils.resolveLink(url, this.bot, msg).then( (message) => this.bot.sendMessage(msgId, message));
+        YartrUtils.resolveLink(url, this, msg).then( (message) => this.sendMessage(msgId, message));
     }
     ontextCb(msg) {
       log.info('Сообщение от ', this.getUserName(msg) ,'. Текст сообщения: ', '"', msg.text, '"');
